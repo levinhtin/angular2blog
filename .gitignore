@@ -1,0 +1,15 @@
+# Node module
+node_modules/
+
+# Bower
+src/bower_components/
+
+# Release
+#dist/
+
+# Build file index
+src/index.html
+*.stackdump
+styles/main.css
+.eslintrc
+.jsbeautyrc

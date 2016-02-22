@@ -1,0 +1,39 @@
+<html>
+
+  <head>
+    <title>Angular 2 QuickStart</title>
+
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+
+    <!-- inject:vendor:js -->
+    <!-- endinject -->
+
+    <!-- inject:angular2 -->
+    <!-- endinject --->
+    
+    <!-- inject:theme:js -->
+    <!-- endinject --->
+    
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        packages: {
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/main')
+            .then(null, console.error.bind(console));
+    </script>
+
+  </head>
+
+  <!-- 3. Display the application -->
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+
+</html>
