@@ -9,6 +9,10 @@ src/bower_components/
 
 # Build file index
 src/index.html
+
+src/libs
+src/app/**/*.js
+
 *.stackdump
 styles/main.css
 .eslintrc
