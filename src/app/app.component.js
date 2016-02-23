@@ -18,8 +18,6 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            // import {Router, Route, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-            // import { HomeComponent } from './components/home/home.component';
             AppComponent = (function () {
                 function AppComponent() {
                 }

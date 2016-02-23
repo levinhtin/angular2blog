@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
-// import {Router, Route, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Router, Route, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
-// import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/home/home.component';
 
 @Component({
   selector: 'blog-app',
