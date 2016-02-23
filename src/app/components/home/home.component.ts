@@ -1,14 +1,16 @@
 import { Component } from 'angular2/core';
-import { Post } from './post';
-import { PostService} from './post.service';
+import { Post } from '../../models/post';
+import { PostService} from '../../services/post.service';
 
 @Component({
-  selector: 'home-posts',
-  templateUrl: 'app/layout/homeposts.html',
-  providers: [PostService]
+  selector: 'home',
+  templateUrl: 'app/layout/homep.html',
+  providers: [PostService],
+  pipes: [],
+  directives: [],
 })
 
-export class HomePostComponent {
+export class HomeComponent {
   posts: Post[];
   
   constructor(private _postService: PostService) { }

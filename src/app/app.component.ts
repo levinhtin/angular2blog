@@ -1,11 +1,21 @@
 import {Component} from 'angular2/core';
-import { Post } from './post';
-import { HomePostComponent } from './home-post.component'
+// import {Router, Route, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+
+// import { HomeComponent } from './components/home/home.component';
 
 @Component({
-    selector: 'my-app',
-    templateUrl: 'app/layout/myapp.html',
-    directives: [HomePostComponent]
+  selector: 'blog-app',
+  templateUrl: 'app/app.html',
+  // directives: [ROUTER_DIRECTIVES],
 })
-export class AppComponent { }
+
+// @RouteConfig([
+//   new Route({ path: '', component: HomeComponent, name: 'Home', useAsDefault: true}),
+//   // new Route({ path: '/post-detail', component: Post, name: 'About'}),
+//   // new Route({ path: '/github/...', component: RepoBrowser, name: 'RepoBrowser'})
+// ])
+
+export class AppComponent { 
+  constructor() {}
+}
 

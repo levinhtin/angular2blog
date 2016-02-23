@@ -1,4 +1,6 @@
-System.register(['angular2/core', './home-post.component'], function(exports_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,30 +10,28 @@ System.register(['angular2/core', './home-post.component'], function(exports_1) 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, home_post_component_1;
+    var core_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (home_post_component_1_1) {
-                home_post_component_1 = home_post_component_1_1;
             }],
         execute: function() {
+            // import {Router, Route, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+            // import { HomeComponent } from './components/home/home.component';
             AppComponent = (function () {
                 function AppComponent() {
                 }
                 AppComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        templateUrl: 'app/layout/myapp.html',
-                        directives: [home_post_component_1.HomePostComponent]
+                        selector: 'blog-app',
+                        templateUrl: 'app/app.html',
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
-            })();
+            }());
             exports_1("AppComponent", AppComponent);
         }
     }
