@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
 import { Post } from '../../models/post';
 import { PostService} from '../../services/post.service';
@@ -15,8 +15,13 @@ import { PostService} from '../../services/post.service';
 export class HomeComponent {
   posts: Post[];
   
-  constructor(private _postService: PostService) { }
+  constructor(
+    private _postService: PostService,
+    private _router: Router) { }
 
+  public gotoDetail(post: Post){
+    this._router.navigate(['Detail', {alias: 'new-world', id: post.Id}]);
+  }
   public getPosts() {
     this._postService.getPosts().then(
       _posts => this.posts = this.setAlias(_posts)

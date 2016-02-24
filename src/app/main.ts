@@ -1,7 +1,17 @@
-import {bootstrap} from 'angular2/platform/browser';
+import {bootstrap}         from 'angular2/platform/browser';
+import {ROUTER_PROVIDERS, LocationStrategy,
+        HashLocationStrategy,
+        PathLocationStrategy,
+        APP_BASE_HREF }  from 'angular2/router';
 // import {HTTP_PROVIDERS} from 'angular2/http';
-import {ROUTER_PROVIDERS} from 'angular2/router';
 
-import {AppComponent} from './app.component';
+// Add these symbols to override the `LocationStrategy`
+import {provide}           from 'angular2/core';
+        
+import {AppComponent}      from './app.component';
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS]);
+bootstrap(AppComponent, [
+  ROUTER_PROVIDERS,
+  provide(APP_BASE_HREF, { useValue: '/' }),
+  provide(LocationStrategy, {useClass: HashLocationStrategy}) // .../#/
+]);
