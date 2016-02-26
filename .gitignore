@@ -12,6 +12,7 @@ src/index.html
 
 src/libs
 src/app/**/*.js
+src/app/**/*.map
 
 *.stackdump
 styles/main.css

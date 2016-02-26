@@ -16,13 +16,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a [routerLink]="['Home']">Home</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a [routerLink]="['About']">About</a>
                     </li>
                     <li>
-                        <a href="post.html">Sample Post</a>
+                        <a [routerLink]="['Detail', { alias: 'new-world-is-start', id: 123 }]">Sample Post</a>
                     </li>
                     <li>
                         <a href="contact.html">Contact</a>
@@ -53,9 +53,10 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <home-posts></home-posts>
-            </div>
+            
+                <!--<home-posts></home-posts>-->
+                <router-outlet></router-outlet>
+
         </div>
     </div>
 
