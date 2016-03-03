@@ -38,10 +38,13 @@ System.register(['angular2/core', 'angular2/router', './components/home/home.com
                         selector: 'blog-app',
                         templateUrl: 'app/app.html',
                         directives: [router_1.ROUTER_DIRECTIVES],
+                        providers: [
+                            router_1.ROUTER_PROVIDERS,
+                        ]
                     }),
                     router_1.RouteConfig([
                         { path: '/', component: home_component_1.HomeComponent, name: 'Home' },
-                        { path: '/post/:alias/:id', component: post_detail_component_1.PostDetailComponent, name: 'Detail' },
+                        { path: '/post/detail/:id', component: post_detail_component_1.PostDetailComponent, name: 'Detail' },
                         { path: '/about', component: about_component_1.AboutComponent, name: 'About' }
                     ]), 
                     __metadata('design:paramtypes', [])

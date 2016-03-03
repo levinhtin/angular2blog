@@ -20,7 +20,9 @@ export class HomeComponent {
     private _router: Router) { }
 
   public gotoDetail(post: Post){
-    this._router.navigate(['Detail', {alias: 'new-world', id: post.Id}]);
+    // this._router.navigate(['Detail', { id: post.Id }]);
+    let link = ['Detail', { id: post.Id }];
+    this._router.navigate(link);
   }
   public getPosts() {
     this._postService.getPosts().then(
