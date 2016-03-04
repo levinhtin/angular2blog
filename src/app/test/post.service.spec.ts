@@ -1,26 +1,31 @@
-import {it, describe, expect, beforeEach, inject} from "angular2/testing";
+import {Component, provide} from 'angular2/core';
+import {it, describe, expect, beforeEach, afterEach, beforeEachProviders, inject, injectAsync} from "angular2/testing";
+import {BaseRequestOptions, Http} from 'angular2/http';
+import {MockBackend} from 'angular2/http/testing';
+
 import {Post} from "../models/post";
 import {PostService} from "../services/post.service";
 import { POSTS } from '../data/mocks/mock-posts';
 
 describe('MyList Tests', () => {
-    let posts: Post[];
-    let service: PostService;
- 
-    beforeEach(() => {
-      service = new PostService();
-      console.log(service);
-      
-        // this.service.getPosts().then(
-        //   _posts => this.posts = _posts
-        // );
-    });
- 
-    it('Should get 5 dogs', () => {
-        // list.ngOnInit();
- 
-        // expect(posts.length).toBe(5);
-        expect(5).toBe(5);
-        // expect(posts).toEqual(['golden retriever', 'french bulldog', 'german shepherd', 'alaskan husky', 'jack russel terrier']);
-    });
+
+    beforeEachProviders(() => [
+      BaseRequestOptions,
+      MockBackend,
+      provide(Http, {
+        useFactory: function(backend, defaultOptions) {
+          return new Http(backend, defaultOptions);
+        },
+        deps: [MockBackend, BaseRequestOptions]
+      }),
+
+      PostService
+    ]);
+  
+    it('Should be greater than 10 items', injectAsync([PostService], (postSrv:PostService) => {
+        return postSrv.getPosts()
+            .then((res) => {
+              expect(res.length).toBeGreaterThan(10);
+            });
+    }));
 });

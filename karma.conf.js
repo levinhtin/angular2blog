@@ -14,7 +14,7 @@ module.exports = function(config) {
       { pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true },
       { pattern: 'node_modules/angular2/bundles/http.dev.js', included: true, watched: true },
       { pattern: 'karma-test-shim.js', included: true, watched: true },
-
+      //  'node_modules/phantomjs-polyfill/bind-polyfill.js',
 
       // paths loaded via module imports
       { pattern: 'src/app/**/*.js', included: false, watched: true },
@@ -34,13 +34,15 @@ module.exports = function(config) {
     // proxied base paths
     proxies: {
       // required for component assests fetched by Angular's compiler
-      '/src/': '/base/src/',
+      '/src': '/base/src',
     },
     // Karma plugins loaded
     plugins: [
+      'karma-mocha-reporter',
       'karma-jasmine',
       'karma-coverage',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-chrome-launcher',
     ],
 
     coverageReporter: {
@@ -57,7 +59,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     singleRun: true,
   });
 }
