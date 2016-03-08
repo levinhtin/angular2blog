@@ -15,13 +15,21 @@ var gulp = require('gulp'),
       'angular2/bundles/angular2.dev.js',
       'angular2/bundles/router.dev.js',
       'jquery/dist/jquery.min.js',
-      'bootstrap/dist/js/bootstrap.min.js'
+      'bootstrap/dist/js/bootstrap.min.js',
+      'jasmine-core/lib/jasmine-core/jasmine.js',
+      'jasmine-core/lib/jasmine-core/jasmine-html.js',
+      'jasmine-core/lib/jasmine-core/boot.js'
     ],
     vendorCss: ['bootstrap/dist/css/bootstrap.css'],
     libDevCss: './src/libs/vendor/css',
     libDevJs: './src/libs/vendor/js',
     themeJs: ['./src/js/clean-blog.js'],
-    themeCss: ['./src/css/clean-blog.css']
+    themeCss: ['./src/css/clean-blog.css'],
+    testJs: ['./src/libs/vendor/js/jasmine.js',
+             './src/libs/vendor/js/jasmine-html.js',
+             './src/libs/vendor/js/boot.js'],
+    testCss: ['./src/libs/vendor/css/jasmine.css'],
+    test: ['./src/app/test/*.js']
   };
 
 gulp.task('clean:vendor:js', function(cb){
@@ -59,11 +67,24 @@ gulp.task('inject:dev', ['clean', 'copy'], function(){
     //-------------------------------
     .pipe(inject(gulp.src(paths.themeJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.themeCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))
+    //--------------INJECT TEST--------------------------
+    .pipe(inject(gulp.src(paths.testJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
+    .pipe(inject(gulp.src(paths.testCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
+    .pipe(inject(gulp.src(paths.test, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:testspec:{{ext}} -->' }))
     
     .pipe(gulp.dest(paths.webroot + '/src'));
 });
 
-gulp.task('dev', ['clean', 'copy:libDevJs', 'inject:dev']);
+gulp.task('inject:test', function(){
+  return gulp.src(paths.webroot + 'unit-test.html')
+    //--------------INJECT TEST--------------------------
+    .pipe(inject(gulp.src(paths.testJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
+    .pipe(inject(gulp.src(paths.testCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
+    
+    .pipe(gulp.dest(paths.webroot + '/src'));
+});
+
+gulp.task('dev', ['clean', 'copy', 'inject:dev']);
 
 gulp.task('default', function(){
   console.log('Gulp');

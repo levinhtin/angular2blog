@@ -9,14 +9,14 @@ import { AboutComponent } from './components/about/about.component';
   selector: 'blog-app',
   templateUrl: 'app/app.html',
   directives: [ROUTER_DIRECTIVES],
-  // providers: [
-  //   ROUTER_PROVIDERS,
-  // ]
+  providers: [
+    ROUTER_PROVIDERS,
+  ]
 })
 
 @RouteConfig([
   { path: '/', component: HomeComponent, name: 'Home' },
-  { path: '/post/:alias/:id', component: PostDetailComponent, name: 'Detail'},
+  { path: '/post/detail/:id', component: PostDetailComponent, name: 'Detail'},
   { path: '/about', component: AboutComponent, name: 'About'}
 ])
 

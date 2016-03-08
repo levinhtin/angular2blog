@@ -12,6 +12,5 @@ import {AppComponent}      from './app.component';
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
-  provide(APP_BASE_HREF, { useValue: '/' }),
-  provide(LocationStrategy, {useClass: HashLocationStrategy}) // .../#/
+  provide(LocationStrategy, {useClass: PathLocationStrategy}) // .../#/
 ]);
