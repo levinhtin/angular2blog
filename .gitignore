@@ -1,6 +1,8 @@
 # Node module
 node_modules/
 
+coverage/
+
 # Bower
 src/bower_components/
 
@@ -10,7 +12,10 @@ src/bower_components/
 # Build file index
 src/index.html
 
-src/libs
+src/libs/
+
+src/typings
+
 src/app/**/*.js
 src/app/**/*.map
 
