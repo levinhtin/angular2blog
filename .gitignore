@@ -21,6 +21,6 @@ src/app/**/*.map
 
 *.stackdump
 styles/main.css
-#.eslintrc
+.eslintrc
 .jsbeautyrc
 
