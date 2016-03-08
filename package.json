@@ -6,6 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
+    "build": "gulp dev",
     "lite": "lite-server --baseDir ./src --port 5000",
     "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
     "test": "live-server --open=src/unit-test.html --port=3000",
