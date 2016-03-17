@@ -8,9 +8,11 @@ import { AboutComponent } from './components/about/about.component';
 @Component({
   selector: 'blog-app',
   templateUrl: 'app/app.html',
-  directives: [ROUTER_DIRECTIVES],
+  directives: [
+    ROUTER_DIRECTIVES
+  ],
   providers: [
-    ROUTER_PROVIDERS,
+    ROUTER_PROVIDERS
   ]
 })
 
@@ -20,7 +22,7 @@ import { AboutComponent } from './components/about/about.component';
   { path: '/about', component: AboutComponent, name: 'About'}
 ])
 
-export class AppComponent { 
+export class AppComponent {
   constructor() {}
 }
 

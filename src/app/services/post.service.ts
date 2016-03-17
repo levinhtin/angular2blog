@@ -6,11 +6,9 @@ import { POSTS } from '../data/mocks/mock-posts';
 
 @Injectable()
 export class PostService {
-  constructor() {
-    
-  };
-  
-  public getPosts(){
+  constructor() {};
+
+  public getPosts(): any {
     return Promise.resolve(POSTS);
   };
 }

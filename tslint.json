@@ -20,13 +20,13 @@
       true,
       "spaces"
     ],
-    "interface-name": true,
+    "interface-name": false,
     "jsdoc-format": true,
     "label-position": true,
     "label-undefined": true,
     "max-line-length": [
       true,
-      140
+      0
     ],
     "member-access": true,
     "member-ordering": [
@@ -53,7 +53,7 @@
     "no-debugger": true,
     "no-duplicate-key": true,
     "no-duplicate-variable": true,
-    "no-empty": true,
+    "no-empty": false,
     "no-eval": true,
     "no-inferrable-types": false,
     "no-internal-module": true,
@@ -65,11 +65,11 @@
     "no-trailing-whitespace": true,
     "no-unreachable": true,
     "no-unused-expression": true,
-    "no-unused-variable": true,
+    "no-unused-variable": false,
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": true,
-    "object-literal-sort-keys": true,
+    "object-literal-sort-keys": false,
     "one-line": [
       true,
       "check-open-brace",
@@ -80,7 +80,7 @@
     ],
     "quotemark": [
       true,
-      "double",
+      "single",
       "avoid-escape"
     ],
     "radix": true,
@@ -89,7 +89,7 @@
     "trailing-comma": [
       true,
       {
-        "multiline": "always",
+        "multiline": "never",
         "singleline": "never"
       }
     ],
@@ -141,18 +141,6 @@
       "check-operator",
       "check-separator",
       "check-type"
-    ],
-    "directive-selector-name": [true, "camelCase"],
-    "component-selector-name": [true, "kebab-case"],
-    "directive-selector-type": [true, "attribute"],
-    "component-selector-type": [true, "element"],
-    "directive-selector-prefix": [true, "sg"],
-    "component-selector-prefix": [true, "sg"],
-    "host-parameter-decorator": true,
-    "input-parameter-decorator": true,
-    "output-parameter-decorator": true,
-    "attribute-parameter-decorator":true,
-    "input-property-directive":true,
-    "output-property-directive":true
+    ]
   }
 }
