@@ -23,4 +23,5 @@ src/app/**/*.map
 styles/main.css
 .eslintrc
 .jsbeautyrc
+npm-debug.log
 
