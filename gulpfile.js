@@ -12,6 +12,7 @@ var gulp = require('gulp'),
       'angular2/bundles/angular2-polyfills.js',
       'systemjs/dist/system.src.js',
       'rxjs/bundles/Rx.js',
+      'zone.js/dist/zone.js',
       'angular2/bundles/angular2.dev.js',
       'angular2/bundles/router.dev.js',
       'jquery/dist/jquery.min.js',
@@ -58,7 +59,10 @@ gulp.task('inject:dev', ['clean', 'copy'], function(){
                           paths.libDevJs + '/bootstrap*.js',
                           paths.libDevJs + '/system*.js',
                           paths.libDevJs + '/*.js',
-                          '!./src/libs/vendor/js/angular2*.js'],
+                          '!./src/libs/vendor/js/angular2*.js',
+                          '!./src/libs/vendor/js/router.dev.js',
+                          '!./src/libs/vendor/js/*boot.js',
+                          '!./src/libs/vendor/js/*jasmine*.js'],
                           { read: false }),
                       { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevCss + '/*.css', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
@@ -68,9 +72,9 @@ gulp.task('inject:dev', ['clean', 'copy'], function(){
     .pipe(inject(gulp.src(paths.themeJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.themeCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))
     //--------------INJECT TEST--------------------------
-    .pipe(inject(gulp.src(paths.testJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
-    .pipe(inject(gulp.src(paths.testCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
-    .pipe(inject(gulp.src(paths.test, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:testspec:{{ext}} -->' }))
+    // .pipe(inject(gulp.src(paths.testJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
+    // .pipe(inject(gulp.src(paths.testCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:test:{{ext}} -->' }))
+    // .pipe(inject(gulp.src(paths.test, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:testspec:{{ext}} -->' }))
     
     .pipe(gulp.dest(paths.webroot + '/src'));
 });

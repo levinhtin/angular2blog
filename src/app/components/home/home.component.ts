@@ -24,6 +24,10 @@ export class HomeComponent {
     let link = ['Detail', { id: post.Id }];
     this._router.navigate(link);
   }
+  
+  public goToAbout() {
+    this._router.navigate(['About']);
+  }
   public getPosts() {
     this._postService.getPosts().then(
       _posts => this.posts = this.setAlias(_posts)
