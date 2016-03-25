@@ -6,7 +6,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 import { AboutComponent } from './components/about/about.component';
 
 @Component({
-  selector: 'blog-app',
+  selector: 'app',
   templateUrl: 'app/app.html',
   directives: [ROUTER_DIRECTIVES],
   providers: [
@@ -16,8 +16,7 @@ import { AboutComponent } from './components/about/about.component';
 
 @RouteConfig([
   { path: '/', component: HomeComponent, name: 'Home', useAsDefault: true },
-  { path: '/**', redirectTo: ['Home'] },
-  { path: 'detail/:id', component: PostDetailComponent, name: 'Detail'},
+  { path: '/post/:alias/:id', component: PostDetailComponent, name: 'Detail'},
   { path: '/about', component: AboutComponent, name: 'About'}
 ])
 
