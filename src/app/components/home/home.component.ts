@@ -9,37 +9,40 @@ import { PostService} from '../../services/post.service';
   templateUrl: 'app/components/home/home.html',
   providers: [ROUTER_PROVIDERS, PostService],
   pipes: [],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES]
 })
 
 export class HomeComponent {
-  posts: Post[];
-  
-  constructor(
-    private _postService: PostService,
-    private _router: Router) { }
+  private posts: Post[];
+  private postService: PostService;
+  private router: Router;
 
-  public gotoDetail(post: Post){
-    // this._router.navigate(['Detail', { id: post.Id }]);
-    let link = ['Detail', { id: post.Id }];
-    this._router.navigate(link);
+  constructor(_postService: PostService, _router: Router) {
+    this.postService = _postService;
+    this.router = _router;
   }
-  public getPosts() {
-    this._postService.getPosts().then(
-      _posts => this.posts = this.setAlias(_posts)
+
+  public gotoDetail(post: Post): void {
+    // this._router.navigate(['Detail', { id: post.Id }]);
+    let link: any = ['Detail', { id: post.Id }];
+    this.router.navigate(link);
+  }
+  public getPosts(): void {
+    this.postService.getPosts().then(
+      (_posts: Post[]) => this.posts = this.setAlias(_posts)
     );
   }
-  public setAlias(items: Post[]): Post[]{
-    var regx1 = /(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g;
-    var regx2 = /\s+/g;
-    
-    items.forEach(element => {
-      element.Alias = element.Title.toLowerCase().replace(regx1, '').replace(regx2, '-');
+  public setAlias(items: Post[]): Post[] {
+    let regx1: any = /(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g;
+    let regx2: any = /\s+/g;
+
+    items.forEach((post: Post) => {
+      post.Alias = post.Title.toLowerCase().replace(regx1, '').replace(regx2, '-');
     });
     return items;
   }
-  
-  ngOnInit() {
+
+  public ngOnInit(): void {
     this.getPosts();
   }
 }

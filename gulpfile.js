@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
   inject = require('gulp-inject'),
   del = require('del');
+var tslint = require("gulp-tslint");
 
   var paths = {
     webroot: './',
@@ -9,6 +10,7 @@ var gulp = require('gulp'),
     vendorJs: [
       'es6-shim/es6-shim.min.js',
       'systemjs/dist/system-polyfills.js',
+      'angular2/es6/dev/src/testing/shims_for_IE.js',
       'angular2/bundles/angular2-polyfills.js',
       'systemjs/dist/system.src.js',
       'rxjs/bundles/Rx.js',
@@ -20,7 +22,8 @@ var gulp = require('gulp'),
       'jasmine-core/lib/jasmine-core/jasmine-html.js',
       'jasmine-core/lib/jasmine-core/boot.js'
     ],
-    vendorCss: ['bootstrap/dist/css/bootstrap.css'],
+    vendorCss: ['bootstrap/dist/css/bootstrap.css',
+                'jasmine-core/lib/jasmine-core/jasmine.css'],
     libDevCss: './src/libs/vendor/css',
     libDevJs: './src/libs/vendor/js',
     themeJs: ['./src/js/clean-blog.js'],
@@ -91,4 +94,12 @@ gulp.task('default', function(){
 });
 gulp.task('watch', function() {
   gulp.watch(paths.webroot + 'index.html', ['inject:dev']);
+});
+
+gulp.task("tslint", function() {
+  gulp.src("src/app/**/*.ts")
+    .pipe(tslint())
+      .pipe(tslint.report("prose", {
+        summarizeFailureOutput: true
+      }));
 });
