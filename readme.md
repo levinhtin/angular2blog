@@ -1,13 +1,13 @@
 ## **USAGE** ##
 
-###** Build & run **##
+### **Build & run** ##
 
 1.  `npm install`
 2.  `gulp dev`
 3.  `npm start`
 
 ---
-###** Run with docker & nginx**##
+### **Run with docker & nginx** ###
 1.  install docker
 2.  pull image nginx: `sudo docker pull nginx`
 3.  run container:
