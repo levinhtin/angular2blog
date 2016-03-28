@@ -8,8 +8,10 @@ var tslint = require("gulp-tslint");
     src: './src/',
     dist: './dist/',
     vendorJs: [
-      'es6-shim/es6-shim.min.js',
+      'es6-shim/es6-shim.js',
+      'es6-shim/es6-shim.map',
       'systemjs/dist/system-polyfills.js',
+      'systemjs/dist/system-polyfills.js.map',
       'angular2/es6/dev/src/testing/shims_for_IE.js',
       'angular2/bundles/angular2-polyfills.js',
       'systemjs/dist/system.src.js',
@@ -23,6 +25,7 @@ var tslint = require("gulp-tslint");
       'jasmine-core/lib/jasmine-core/boot.js'
     ],
     vendorCss: ['bootstrap/dist/css/bootstrap.css',
+                'bootstrap/dist/css/bootstrap.css.map',
                 'jasmine-core/lib/jasmine-core/jasmine.css'],
     libDevCss: './src/libs/vendor/css',
     libDevJs: './src/libs/vendor/js',
@@ -57,14 +60,14 @@ gulp.task('copy', ['clean', 'copy:libDevJs', 'copy:libDevCss']);
 
 gulp.task('inject:dev', ['clean', 'copy'], function(){
   return gulp.src(paths.webroot + 'index.html')
-    .pipe(inject(gulp.src([paths.libDevJs + '/jquery*.js',
-                          paths.libDevJs + '/bootstrap*.js',
-                          paths.libDevJs + '/system*.js',
-                          paths.libDevJs + '/*.js',
-                          '!./src/libs/vendor/js/angular2*.js',
-                          '!./src/libs/vendor/js/boot.js',
-                          '!./src/libs/vendor/js/jasmine*.js'],
-                          { read: false }),
+    .pipe(inject(gulp.src([ paths.libDevJs + '/jquery*.js',
+                            paths.libDevJs + '/bootstrap*.js',
+                            paths.libDevJs + '/system*.js',
+                            paths.libDevJs + '/*.js',
+                            '!./src/libs/vendor/js/angular2*.js',
+                            '!./src/libs/vendor/js/boot.js',
+                            '!./src/libs/vendor/js/jasmine*.js'],
+                      { read: false }),
                       { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevCss + '/*.css', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     // -------------------------------
