@@ -61,7 +61,9 @@ gulp.task('inject:dev', ['clean', 'copy'], function(){
                           paths.libDevJs + '/bootstrap*.js',
                           paths.libDevJs + '/system*.js',
                           paths.libDevJs + '/*.js',
-                          '!./src/libs/vendor/js/angular2*.js'],
+                          '!./src/libs/vendor/js/angular2*.js',
+                          '!./src/libs/vendor/js/boot.js',
+                          '!./src/libs/vendor/js/jasmine*.js'],
                           { read: false }),
                       { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevCss + '/*.css', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
