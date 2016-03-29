@@ -10,5 +10,3 @@ install:
 
 after_script:
   - gulp dev
-  - npm run tsc
-  - npm run karmatest

@@ -10,8 +10,8 @@
     "lite": "lite-server --baseDir ./src --port 5000",
     "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
     "lint": "gulp tslint",
-    "test": "live-server --open=src/unit-test.html --port=3000",
-    "karmatest": "concurrent \"npm run tsc\" \"karma start karma.conf.js\" ",
+    "testonweb": "live-server --open=src/unit-test.html --port=3000",
+    "test": "concurrent \"npm run tsc\" \"karma start karma.conf.js\" ",
     "typings": "typings",
     "postinstall": "typings install"
   },
