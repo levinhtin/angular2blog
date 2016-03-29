@@ -7,6 +7,7 @@ before_install:
   - npm install -g gulp
 install:
   - npm install
+  - npm run tsc
 
 after_script:
   - gulp dev
