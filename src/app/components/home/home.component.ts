@@ -1,5 +1,5 @@
 import { Component } from 'angular2/core';
-import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {Router, ROUTER_DIRECTIVES } from 'angular2/router';
 
 import { Post } from '../../models/post';
 import { PostService} from '../../services/post.service';
@@ -7,9 +7,10 @@ import { PostService} from '../../services/post.service';
 @Component({
   selector: 'home',
   templateUrl: 'app/components/home/home.html',
-  providers: [ROUTER_PROVIDERS, PostService],
-  pipes: [],
-  directives: [ROUTER_DIRECTIVES]
+  providers: [PostService],
+  // ROUTER_DIRECTIVES use for [routerLink]="['Detail', { alias: 'abc', id: post.Id}]"
+  directives: [ROUTER_DIRECTIVES],
+  pipes: []
 })
 
 export class HomeComponent {
@@ -24,7 +25,7 @@ export class HomeComponent {
 
   public gotoDetail(post: Post): void {
     // this._router.navigate(['Detail', { id: post.Id }]);
-    let link: any = ['Detail', { id: post.Id }];
+    let link: any = ['Detail', { id: post.Id, alias: post.Alias }];
     this.router.navigate(link);
   }
   public getPosts(): void {
