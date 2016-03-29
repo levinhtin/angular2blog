@@ -1,14 +1,18 @@
 var gulp = require('gulp'),
   inject = require('gulp-inject'),
   del = require('del');
+var tslint = require("gulp-tslint");
 
   var paths = {
     webroot: './',
     src: './src/',
     dist: './dist/',
     vendorJs: [
-      'es6-shim/es6-shim.min.js',
+      'es6-shim/es6-shim.js',
+      'es6-shim/es6-shim.map',
       'systemjs/dist/system-polyfills.js',
+      'systemjs/dist/system-polyfills.js.map',
+      'angular2/es6/dev/src/testing/shims_for_IE.js',
       'angular2/bundles/angular2-polyfills.js',
       'systemjs/dist/system.src.js',
       'rxjs/bundles/Rx.js',
@@ -20,7 +24,9 @@ var gulp = require('gulp'),
       'jasmine-core/lib/jasmine-core/jasmine-html.js',
       'jasmine-core/lib/jasmine-core/boot.js'
     ],
-    vendorCss: ['bootstrap/dist/css/bootstrap.css'],
+    vendorCss: ['bootstrap/dist/css/bootstrap.css',
+                'bootstrap/dist/css/bootstrap.css.map',
+                'jasmine-core/lib/jasmine-core/jasmine.css'],
     libDevCss: './src/libs/vendor/css',
     libDevJs: './src/libs/vendor/js',
     themeJs: ['./src/js/clean-blog.js'],
@@ -54,12 +60,14 @@ gulp.task('copy', ['clean', 'copy:libDevJs', 'copy:libDevCss']);
 
 gulp.task('inject:dev', ['clean', 'copy'], function(){
   return gulp.src(paths.webroot + 'index.html')
-    .pipe(inject(gulp.src([paths.libDevJs + '/jquery*.js',
-                          paths.libDevJs + '/bootstrap*.js',
-                          paths.libDevJs + '/system*.js',
-                          paths.libDevJs + '/*.js',
-                          '!./src/libs/vendor/js/angular2*.js'],
-                          { read: false }),
+    .pipe(inject(gulp.src([ paths.libDevJs + '/jquery*.js',
+                            paths.libDevJs + '/bootstrap*.js',
+                            paths.libDevJs + '/system*.js',
+                            paths.libDevJs + '/*.js',
+                            '!./src/libs/vendor/js/angular2*.js',
+                            '!./src/libs/vendor/js/boot.js',
+                            '!./src/libs/vendor/js/jasmine*.js'],
+                      { read: false }),
                       { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevCss + '/*.css', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     // -------------------------------
@@ -91,4 +99,12 @@ gulp.task('default', function(){
 });
 gulp.task('watch', function() {
   gulp.watch(paths.webroot + 'index.html', ['inject:dev']);
+});
+
+gulp.task("tslint", function() {
+  gulp.src("src/app/**/*.ts")
+    .pipe(tslint())
+      .pipe(tslint.report("prose", {
+        summarizeFailureOutput: true
+      }));
 });

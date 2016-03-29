@@ -5,9 +5,9 @@ import {ROUTER_PROVIDERS, LocationStrategy,
         APP_BASE_HREF }  from 'angular2/router';
 // import {HTTP_PROVIDERS} from 'angular2/http';
 
-// Add these symbols to override the `LocationStrategy`
+// add these symbols to override the `LocationStrategy`
 import {provide}           from 'angular2/core';
-        
+
 import {AppComponent}      from './app.component';
 
 bootstrap(AppComponent, [
