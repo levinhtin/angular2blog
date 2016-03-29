@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - "0.12.7"
+
+before_install:
+  - npm install -g gulp
+install:
+  - npm install
+
+after_script:
+  - gulp dev
+  - npm run tsc
+  - npm run karmatest
