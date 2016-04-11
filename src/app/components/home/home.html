@@ -1,6 +1,6 @@
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
   <div class="post-preview" *ngFor="#post of posts">
-      <a [routerLink]="['/About']">
+      <a [routerLink]="['Detail', {id: post.Id}]">
       <!--<a href="javascript:void(0)" (click)="gotoDetail(post)">-->
           <h2 class="post-title">
               <!--Man must explore, and this is exploration at its greatest-->

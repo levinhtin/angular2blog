@@ -7,12 +7,20 @@ module.exports = function(config) {
 
     files: [
       // paths loaded by Karma
-      { pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true },
+      // JS vendor for angular2
+      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: true },
       { pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true },
       { pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: true },
+      { pattern: 'node_modules/es6-shim/es6-shim.js', included: true, watched: true },
+      
+      { pattern: 'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js', included: true, watched: true },
+      { pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true },
       { pattern: 'node_modules/angular2/bundles/angular2.dev.js', included: true, watched: true },
-      { pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true },
       { pattern: 'node_modules/angular2/bundles/http.dev.js', included: true, watched: true },
+      { pattern: 'node_modules/angular2/bundles/router.dev.js', included: true, watched: true },
+      // End vendor
+
+      { pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true },
       { pattern: 'karma-test-shim.js', included: true, watched: true },
       //  'node_modules/phantomjs-polyfill/bind-polyfill.js',
 
@@ -59,7 +67,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: true,
   });
 }

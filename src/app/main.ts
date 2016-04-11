@@ -1,5 +1,9 @@
 import {bootstrap}         from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS, LocationStrategy,
+import {ROUTER_DIRECTIVES,
+        ROUTER_PROVIDERS,
+        Router,
+        RouteConfig,
+        LocationStrategy,
         HashLocationStrategy,
         PathLocationStrategy,
         APP_BASE_HREF }  from 'angular2/router';
@@ -12,5 +16,5 @@ import {AppComponent}      from './app.component';
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
-  provide(LocationStrategy, {useClass: PathLocationStrategy}) // .../#/
+  provide(LocationStrategy, {useClass: HashLocationStrategy}) // .../#/
 ]);
