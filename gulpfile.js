@@ -10,16 +10,16 @@ var tslint = require("gulp-tslint");
     vendorJs: [
       'es6-shim/es6-shim.js',
       'es6-shim/es6-shim.map',
-      'systemjs/dist/system-polyfills.js',
-      'systemjs/dist/system-polyfills.js.map',
-      'angular2/es6/dev/src/testing/shims_for_IE.js',
-      'angular2/bundles/angular2-polyfills.js',
+      'zone.js/dist/zone.js',
+      'reflect-metadata/Reflect.js',
       'systemjs/dist/system.src.js',
-      'rxjs/bundles/Rx.js',
-      'angular2/bundles/angular2.dev.js',
-      'angular2/bundles/router.dev.js',
+
+      'rxjs/',
+      '@angular/',
+
       'jquery/dist/jquery.min.js',
       'bootstrap/dist/js/bootstrap.min.js',
+
       'jasmine-core/lib/jasmine-core/jasmine.js',
       'jasmine-core/lib/jasmine-core/jasmine-html.js',
       'jasmine-core/lib/jasmine-core/boot.js'
