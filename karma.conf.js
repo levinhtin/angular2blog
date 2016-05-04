@@ -8,19 +8,16 @@ module.exports = function(config) {
     files: [
       // paths loaded by Karma
       // JS vendor for angular2
-      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: true },
+      { pattern: 'node_modules/es6-shim/es6-shim.min.js', included: true, watched: true },
+      { pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: true },
+      { pattern: 'node_modules/reflect-metadata/Reflect.js', included: true, watched: true },
       { pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true },
-      { pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: true },
-      { pattern: 'node_modules/es6-shim/es6-shim.js', included: true, watched: true },
       
-      { pattern: 'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js', included: true, watched: true },
-      { pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true },
-      { pattern: 'node_modules/angular2/bundles/angular2.dev.js', included: true, watched: true },
-      { pattern: 'node_modules/angular2/bundles/http.dev.js', included: true, watched: true },
-      { pattern: 'node_modules/angular2/bundles/router.dev.js', included: true, watched: true },
+      { pattern: 'systemjs.config.js', included: true, watched: true },
+
       // End vendor
 
-      { pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true },
+      // { pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true },
       { pattern: 'karma-test-shim.js', included: true, watched: true },
       //  'node_modules/phantomjs-polyfill/bind-polyfill.js',
 
@@ -46,11 +43,13 @@ module.exports = function(config) {
     },
     // Karma plugins loaded
     plugins: [
-      'karma-mocha-reporter',
-      'karma-jasmine',
-      'karma-coverage',
-      'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
+      // 'karma-mocha-reporter',
+      require('karma-mocha-reporter'),
+      require('karma-jasmine'),
+      // 'karma-jasmine',
+      require('karma-coverage'),
+      require('karma-phantomjs-launcher'),
+      require('karma-chrome-launcher'),
     ],
 
     coverageReporter: {

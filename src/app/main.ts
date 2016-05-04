@@ -1,20 +1,18 @@
-import {bootstrap}         from 'angular2/platform/browser';
-import {ROUTER_DIRECTIVES,
-        ROUTER_PROVIDERS,
-        Router,
-        RouteConfig,
-        LocationStrategy,
-        HashLocationStrategy,
-        PathLocationStrategy,
-        APP_BASE_HREF }  from 'angular2/router';
-// import {HTTP_PROVIDERS} from 'angular2/http';
+import {bootstrap}         from '@angular/platform-browser-dynamic';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 // add these symbols to override the `LocationStrategy`
-import {provide}           from 'angular2/core';
+import {provide, enableProdMode}           from '@angular/core';
+import {HTTP_PROVIDERS} from '@angular/http';
+import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
 import {AppComponent}      from './app.component';
 
+// enableProdMode()
+
 bootstrap(AppComponent, [
+  HTTP_PROVIDERS,
   ROUTER_PROVIDERS,
-  provide(LocationStrategy, {useClass: HashLocationStrategy}) // .../#/
-]);
+  provide(LocationStrategy, {useClass: HashLocationStrategy})
+])
+.catch(err => console.error(err));

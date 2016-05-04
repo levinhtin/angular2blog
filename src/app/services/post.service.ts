@@ -1,5 +1,5 @@
-import { Injectable } from 'angular2/core';
-import {MockBackend} from 'angular2/http/testing';
+import { Injectable } from '@angular/core';
+// import {MockBackend} from '@angular/testing';
 
 import { Post } from '../models/post';
 import { POSTS } from '../data/mocks/mock-posts';

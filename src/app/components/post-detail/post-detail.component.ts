@@ -1,5 +1,5 @@
-import { Component, OnInit } from 'angular2/core';
-import { Router, RouteParams } from 'angular2/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouteParams } from '@angular/router-deprecated';
 
 import { Post } from '../../models/post';
 
@@ -18,7 +18,7 @@ export class PostDetailComponent implements OnInit {
       this.router = _router;
       this.routeParams = _routeParams;
   }
-  ngOnInit() {
-    let id = this.routeParams.get('id');
+  public ngOnInit(): void {
+    let id: string = this.routeParams.get('id');
   }
 }
