@@ -14,9 +14,6 @@ var tslint = require("gulp-tslint");
       'reflect-metadata/Reflect.js',
       'systemjs/dist/system.src.js',
 
-      'rxjs/',
-      '@angular/',
-
       'jquery/dist/jquery.min.js',
       'bootstrap/dist/js/bootstrap.min.js',
 
@@ -46,8 +43,19 @@ gulp.task('clean:vendor:css', function(cb){
 });
 
 gulp.task('clean', ['clean:vendor:js', 'clean:vendor:css']);
-
-gulp.task('copy:libDevJs', function(){
+gulp.task('copy:vendor:angular', function() {
+  return gulp.src('@angular/**/*', { cwd: './node_modules/'})
+      .pipe(gulp.dest(paths.libDevJs + '/@angular'));
+});
+gulp.task('copy:vendor:rxjs', function() {
+  return gulp.src('rxjs/**/*', { cwd: './node_modules/'})
+      .pipe(gulp.dest(paths.libDevJs + '/rxjs'));
+});
+gulp.task('copy:vendor:angularInMemoryApi', function() {
+  return gulp.src('angular2-in-memory-web-api/**/*', { cwd: './node_modules/'})
+      .pipe(gulp.dest(paths.libDevJs + '/angular2-in-memory-web-api'));
+});
+gulp.task('copy:libDevJs', ['copy:vendor:angular', 'copy:vendor:rxjs', 'copy:vendor:angularInMemoryApi'], function(){
   return gulp.src(paths.vendorJs, { cwd: './node_modules/'})
       .pipe(gulp.dest(paths.libDevJs));
 });
@@ -64,14 +72,14 @@ gulp.task('inject:dev', ['clean', 'copy'], function(){
                             paths.libDevJs + '/bootstrap*.js',
                             paths.libDevJs + '/system*.js',
                             paths.libDevJs + '/*.js',
-                            '!./src/libs/vendor/js/angular2*.js',
                             '!./src/libs/vendor/js/boot.js',
                             '!./src/libs/vendor/js/jasmine*.js'],
                       { read: false }),
                       { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevCss + '/*.css', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
-    // -------------------------------
-    .pipe(inject(gulp.src([paths.libDevJs + '/angular2*.js', paths.libDevJs + '/router.dev.js'], { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:angular2 -->' }))
+    .pipe(inject(gulp.src(paths.libDevJs + '/', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
+    .pipe(inject(gulp.src('./src/js/systemjs.config.js', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:systemjs:{{ext}} -->' }))
+
     //-------------------------------
     .pipe(inject(gulp.src(paths.themeJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.themeCss, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))

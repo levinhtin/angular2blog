@@ -15,21 +15,12 @@
     <!-- inject:vendor:js -->
     <!-- endinject -->
 
-    <!-- inject:angular2 -->
+    <!-- inject:systemjs:js -->
     <!-- endinject -->
     
     <!-- 2. Configure SystemJS -->
     <script>
-      System.config({
-        packages: {
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/main')
-            .then(null, console.error.bind(console));
+      System.import('app').catch(function(err){ console.error(err);  });
     </script>
     <base href="/">
   </head>
