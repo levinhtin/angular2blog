@@ -5,13 +5,13 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 
 export class EllipsisPipe implements PipeTransform {
-  public transform(val: string, args: number[]): string {
-    if (args[0] === -1) {
+  public transform(val: string, limit: number): string {
+    if (!limit || limit < 0) {
       return val;
     }
 
-    if (val.length > args[0]) {
-      return val.substring(0, args[0]) + '...';
+    if (val.length > limit) {
+      return val.substring(0, limit) + '...';
     } else {
       return val;
     }

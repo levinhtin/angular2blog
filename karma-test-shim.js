@@ -1,117 +1,88 @@
-// // Turn on full stack traces in errors to help debugging
-// Error.stackTraceLimit = Infinity;
+// FROM JULIE
 
-
-// jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
-
-// // // Cancel Karma's synchronous start,
-// // // we will call `__karma__.start()` later, once all the specs are loaded.
-// __karma__.loaded = function() {};
-
-
-// System.config({
-//   packages: {
-//     'base/src': {
-//       defaultExtension: false,
-//       format: 'register',
-//       map: Object.keys(window.__karma__.files).
-//             filter(onlyAppFiles).
-//             reduce(function createPathRecords(pathsMapping, appPath) {
-
-//               // creates local module name mapping to global path with karma's fingerprint in path, e.g.:
-//               // './hero.service': '/base/src/app/hero.service.js?f4523daf879cfb7310ef6242682ccf10b2041b3e'
-//               var moduleName = appPath.replace(/^\/base\/src\//, './').replace(/\.js$/, '');
-//               pathsMapping[moduleName] = appPath + '?' + window.__karma__.files[appPath]
-//               return pathsMapping;
-//             }, {})
-
-//       }
-//     }
-// });
-
-// System.import('angular2/src/platform/browser/browser_adapter').then(function(browser_adapter) {
-//   browser_adapter.BrowserDomAdapter.makeCurrent();
-// }).then(function() {
-//   return Promise.all(
-//     Object.keys(window.__karma__.files) // All files served by Karma.
-//     .filter(onlySpecFiles)
-//     // .map(filePath2moduleName)        // Normalize paths to module names.
-//     .map(function(moduleName) {
-//       // loads all spec files via their global module names (e.g. 'base/src/app/hero.service.spec')
-//       return System.import(moduleName);
-//     }));
-// })
-// .then(function() {
-//   __karma__.start();
-// }, function(error) {
-//   __karma__.error(error.stack || error);
-// });
-
-
-// function filePath2moduleName(filePath) {
-//   return filePath.
-//            replace(/^\//, '').              // remove / prefix
-//            replace(/\.\w+$/, '');           // remove suffix
-// }
-
-
-// function onlyAppFiles(filePath) {
-//   return /\/base\/src\/app\/(?!.*\.spec\.js$).*\.js$/.test(filePath);
-// }
-
-
-// function onlySpecFiles(path) {
-//   return /spec\.js$/.test(path);
-// }
-
-//--------------------------------------------------------------------------------------------
-// Turn on full stack traces in errors to help debugging
-Error.stackTraceLimit=Infinity;
-
+/*global jasmine, __karma__, window*/
+Error.stackTraceLimit = Infinity;
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
-// Cancel Karma's synchronous start,
-// we will call `__karma__.start()` later, once all the specs are loaded.
-__karma__.loaded = function() {};
+__karma__.loaded = function () {
+};
 
-// System.config({
-//     baseURL: '/base/',
-//     defaultJSExtensions: true,
-//     paths: {
-//         'angular2/*': 'test/helpers/setup',
-//         'rxjs/*': 'node_modules/rxjs/*.js'
-//     }
-// });
 
-System.import('test/helpers/setup')
-.then(function() {
-    return Promise.all(
-        Object.keys(window.__karma__.files)
-        .filter(onlySpecFiles)
-        .map(file2moduleName)
-        .map(importModules)
-    );
-})
-.then(function() {
-    __karma__.start();
-}, function(error) {
-    __karma__.error(error.name + ": " + error.message);
+function isJsFile(path) {
+  return path.slice(-3) == '.js'; // '.js' === 3 character => -3
+}
+
+function isSpecFile(path) {
+  return path.slice(-7) == 'spec.js' || path.slice(-6) == 'e2e.js'; // 'spec.js' === 7 character => -7, 'e2e.js' === 6 character => -6
+}
+
+function isBuiltFile(path) {
+  var builtPath = '/base/src/'; //change follow your app
+  return isJsFile(path) && (path.substr(0, builtPath.length) == builtPath);
+}
+
+var allSpecFiles = Object.keys(window.__karma__.files)
+  .filter(isSpecFile)
+  .filter(isBuiltFile);
+
+// Load our SystemJS configuration.
+System.config({
+  baseURL: '/base'
 });
 
-// Filter spec files
-function onlySpecFiles(path) {
-  return /spec\.js$/.test(path);
-}
+System.config(
+{
+  map: {
+    'rxjs': 'node_modules/rxjs',
+    '@angular': 'node_modules/@angular',
+    'app': 'src/app' //change follow your app
+  },
+  packages: {
+    'app': {
+      main: 'main.js', //change follow your app
+      defaultExtension: 'js'
+    },
+    '@angular/core': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/compiler': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/common': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-browser': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/platform-browser-dynamic': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    'rxjs': {
+      defaultExtension: 'js'
+    }
+  }
+});
 
-// Normalize paths to module names.
-function file2moduleName(filePath) {
-  return filePath.replace(/\\/g, '/')
-    .replace(/^\/base\//, '')
-    .replace(/\.js/, '');
-}
+Promise.all([
+  System.import('@angular/core/testing'),
+  System.import('@angular/platform-browser-dynamic/testing')
+]).then(function (providers) {
+  var testing = providers[0];
+  var testingBrowser = providers[1];
 
-// Import module path
-function importModules(path) {
-    return System.import(path);
-    
-}
+  testing.setBaseTestProviders(testingBrowser.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+    testingBrowser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+
+}).then(function() {
+  // Finally, load all spec files.
+  // This will run the tests directly.
+  return Promise.all(
+    allSpecFiles.map(function (moduleName) {
+      return System.import(moduleName);
+    }));
+}).then(__karma__.start, __karma__.error);

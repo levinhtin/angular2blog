@@ -78,7 +78,7 @@ gulp.task('inject:dev', ['clean', 'copy'], function(){
                       { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevCss + '/*.css', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
     .pipe(inject(gulp.src(paths.libDevJs + '/', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:vendor:{{ext}} -->' }))
-    .pipe(inject(gulp.src('./src/js/systemjs.config.js', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:systemjs:{{ext}} -->' }))
+    .pipe(inject(gulp.src('./src/systemjs.config.js', { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:systemjs:{{ext}} -->' }))
 
     //-------------------------------
     .pipe(inject(gulp.src(paths.themeJs, { read: false }), { ignorePath: 'src', addRootSlash: false, starttag: '<!-- inject:theme:{{ext}} -->' }))

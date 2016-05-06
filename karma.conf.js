@@ -7,36 +7,56 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     files: [
-      { pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true },
-      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: true },
-      { pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: false },
-      { pattern: 'node_modules/zone.js/dist/long-stack-trace-zone.js', included: true, watched: false },
-      { pattern: 'node_modules/zone.js/dist/async-test.js', included: true, watched: false },
-      { pattern: 'node_modules/zone.js/dist/jasmine-patch.js', included: true, watched: false },
-      { pattern: 'node_modules/reflect-metadata/Reflect.js', included: true, watched: false },
+      // Polyfills.
+      'node_modules/es6-shim/es6-shim.js',
 
-      { pattern: 'node_modules/rxjs/**', included: false, watched: false },
-      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
+      'node_modules/reflect-metadata/Reflect.js',
 
-      { pattern: 'karma-test-shim.js', included: true, watched: true },
-      //  'node_modules/phantomjs-polyfill/bind-polyfill.js',
+      // System.js for module loading
+      'node_modules/systemjs/dist/system-polyfills.js',
+      'node_modules/systemjs/dist/system.src.js',
+
+      // Zone.js dependencies
+      'node_modules/zone.js/dist/zone.js',
+      'node_modules/zone.js/dist/jasmine-patch.js',
+      'node_modules/zone.js/dist/sync-test.js',
+      'node_modules/zone.js/dist/async-test.js',
+      'node_modules/zone.js/dist/fake-async-test.js',
+
+      // RxJs.
+      { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
+
+
+      {pattern: 'karma-test-shim.js', included: true, watched: true},
+      {pattern: 'src/test/matchers.js', included: true, watched: true},
 
       // paths loaded via module imports
-      { pattern: 'src/app/**/*.js', included: false, watched: true },
-      
+      // Angular itself
+      {pattern: 'node_modules/@angular/**/*.js', included: false, watched: true},
+      {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: true},
+
+      // Our built application code
+      {pattern: 'src/app/**/*.js', included: false, watched: true},
+      {pattern: 'src/test/**/*.js', included: false, watched: true},
+
+      // paths loaded via Angular's component compiler
+      // (these paths need to be rewritten, see proxies section)
+      {pattern: 'src/**/*.html', included: false, watched: true},
+      {pattern: 'src/**/*.css', included: false, watched: true},
+
       // paths to support debugging with source maps in dev tools
-      { pattern: 'src/app/**/*.ts', included: false, watched: false },
-      { pattern: 'src/app/**/*.js.map', included: false, watched: false }
+      {pattern: 'src/**/*.ts', included: false, watched: false},
+      {pattern: 'src/**/*.js.map', included: false, watched: false}
     ],
-    preprocessors: {
-      'src/app/**/*spec.js': 'coverage'
-    },
+    // preprocessors: {
+    //   'src/app/**/*spec.js': 'coverage'
+    // },
     // proxied base paths
     proxies: {
       // required for component assests fetched by Angular's compiler
-      '/src': '/base/src',
-      '/node_modules': '/base/node_modules',
-      '/test': '/base/test'
+      '/app/': '/base/src/app/',
+      '/src/': '/base/src/'
     },
     // Karma plugins loaded
     plugins: [

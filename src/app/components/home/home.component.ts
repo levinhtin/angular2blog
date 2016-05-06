@@ -14,6 +14,7 @@ import { PostService} from '../../services/post.service';
 })
 
 export class HomeComponent {
+  private title: string;
   private posts: Post[];
   private postService: PostService;
   private router: Router;
@@ -45,5 +46,6 @@ export class HomeComponent {
 
   public ngOnInit(): void {
     this.getPosts();
+    this.title = 'Home Title';
   }
 }
