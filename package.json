@@ -41,7 +41,6 @@
     "angular2-in-memory-web-api": "0.0.7",
     "concurrently": "^1.0.0",
     "del": "^2.2.0",
-    "es6-shim": "^0.35.0",
     "eslint": "2.4.0",
     "gulp": "^3.9.0",
     "gulp-inject": "^3.0.0",
