@@ -27,7 +27,7 @@ var allSpecFiles = Object.keys(window.__karma__.files)
 
 // Load our SystemJS configuration.
 System.config({
-  baseURL: '/base'
+  baseURL: '/base/'
 });
 
 System.config(
@@ -42,7 +42,7 @@ System.config(
       main: 'main.js', //change follow your app
       defaultExtension: 'js'
     },
-    '@angular/core': {
+    '@angular/common': {
       main: 'index.js',
       defaultExtension: 'js'
     },
@@ -50,7 +50,11 @@ System.config(
       main: 'index.js',
       defaultExtension: 'js'
     },
-    '@angular/common': {
+    '@angular/core': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/http': {
       main: 'index.js',
       defaultExtension: 'js'
     },
@@ -59,6 +63,14 @@ System.config(
       defaultExtension: 'js'
     },
     '@angular/platform-browser-dynamic': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/router': {
+      main: 'index.js',
+      defaultExtension: 'js'
+    },
+    '@angular/router-deprecated': {
       main: 'index.js',
       defaultExtension: 'js'
     },

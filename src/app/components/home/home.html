@@ -1,5 +1,5 @@
 <h3>{{title}}</h3>
-<article class="post tag-getting-started" *ngFor="#post of posts">
+<article class="post tag-getting-started" *ngFor="let post of posts">
     <header class="post-header">
     <span class="post-meta"><time datetime="2014-01-07">07 Jan 2014</time> on <a href="http://ghostintheshell.ghost.io/tag/getting-started/">Getting Started</a></span>
     <h2 class="post-title"><a [routerLink]="['Detail', {id: post.Id}]">{{post.Title}}</a></h2>
