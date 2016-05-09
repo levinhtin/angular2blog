@@ -1,41 +1,43 @@
-// import {
-//   beforeEachProviders,
-//   describe,
-//   expect,
-//   inject,
-//   it
-// } from '@angular/core/testing';
-// import {
-//   ComponentFixture,
-//   TestComponentBuilder
-// } from '@angular/compiler/testing';
-// import { ROUTER_FAKE_PROVIDERS } from '@angular/router/testing';
-// import { AppComponent } from '../../app/app.component';
+import {
+  beforeEachProviders,
+  describe,
+  expect,
+  inject,
+  it
+} from '@angular/core/testing';
 
-// // import { setBaseTestProviders } from '@angular/core/testing';
-// import {
-//   TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS,
-//   TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS
-// } from '@angular/platform-browser-dynamic/testing';
+import { Component } from '@angular/core';
+import {
+  ComponentFixture,
+  TestComponentBuilder
+} from '@angular/compiler/testing';
+import { ROUTER_FAKE_PROVIDERS } from '@angular/router/testing';
+import { AppComponent } from '../../app/app.component';
 
-// // setBaseTestProviders(TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+export function main() {
+  describe('App', () => {
 
-// describe('App', () => {
+    // unit tests which uses Router: https://github.com/mgechev/angular2-seed/blob/master/app/components/app/app_spec.ts#L30
+    beforeEachProviders(() => [ROUTER_FAKE_PROVIDERS]);
 
-//   // unit tests which uses Router: https://github.com/mgechev/angular2-seed/blob/master/app/components/app/app_spec.ts#L30
-//   beforeEachProviders(() => [ROUTER_FAKE_PROVIDERS]);
+    it('should correctly home page title', () => {
+        expect(true).toBe(true);
+    });
+    // it('should be able to test', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+    //   return tcb.createAsync(AppComponent).then((componentFixture: ComponentFixture<AppComponent>) => {
+    //     componentFixture.detectChanges();
+    //     expect(true).toBe(true);
+    //   });
+    // }));
 
-//   it('should correctly home page title', () => {
-//       expect(true).toBe(true);
-//   });
-//   // it('should be able to test', inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-//   //   return tcb.createAsync(AppComponent).then((componentFixture: ComponentFixture<AppComponent>) => {
-//   //     componentFixture.detectChanges();
-//   //     expect(true).toBe(true);
-//   //   });
-//   // }));
-
-// });
+  });
+}
+@Component({
+  selector: 'test-cmp',
+  template: '<sd-app></sd-app>',
+  directives: [AppComponent]
+})
+class TestComponent {}
 
 // import {
 //   fit,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouteParams } from '@angular/router';
+import { Router, RouteParams } from '@angular/router-deprecated';
 
 import { Post } from '../../models/post';
 
