@@ -19,6 +19,9 @@ typings
 src/app/**/*.js
 src/app/**/*.map
 
+src/test/**/*.js
+src/test/**/*.map
+
 *.stackdump
 styles/main.css
 .eslintrc

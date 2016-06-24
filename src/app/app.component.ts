@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
@@ -12,16 +12,8 @@ import { AboutComponent } from './components/about/about.component';
     ROUTER_DIRECTIVES
   ],
   providers: [
-    ROUTER_PROVIDERS
   ]
 })
-
-@RouteConfig([
-  { path: '/', component: HomeComponent, name: 'Home', useAsDefault: true },
-  { path: '/**', redirectTo: ['Home']},
-  { path: '/:id', component: PostDetailComponent, name: 'Detail'},
-  { path: '/about', component: AboutComponent, name: 'About'}
-])
 
 export class AppComponent {
   constructor() {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import {Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Post } from '../../models/post';
 import { PostService} from '../../services/post.service';
@@ -24,11 +24,11 @@ export class HomeComponent {
     this.router = _router;
   }
 
-  public gotoDetail(post: Post): void {
-    // this._router.navigate(['Detail', { id: post.Id }]);
-    let link: any = ['Detail', { id: post.Id, alias: post.Alias }];
-    this.router.navigate(link);
-  }
+  // public gotoDetail(post: Post): void {
+  //   // this._router.navigate(['Detail', { id: post.Id }]);
+  //   let link: any = ['Detail', { id: post.Id, alias: post.Alias }];
+  //   this.router.navigate(link);
+  // }
   public getPosts(): void {
     this.postService.getPosts().then(
       (_posts: Post[]) => this.posts = this.setAlias(_posts)
